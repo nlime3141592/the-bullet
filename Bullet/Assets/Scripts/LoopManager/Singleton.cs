@@ -11,9 +11,13 @@ namespace Unchord
             {
                 if (s_instance != null)
                     return s_instance;
-
-                GameObject instanceObject = new GameObject($"@{typeof(T_MonoBehaviour).Name}");
-                s_instance = instanceObject.AddComponent<T_MonoBehaviour>();
+                
+                if (s_instance == null && (s_instance = (T_MonoBehaviour)FindAnyObjectByType<T_MonoBehaviour>()) == null)
+                {
+                    GameObject instanceObject = new GameObject($"@{typeof(T_MonoBehaviour).Name}");
+                    s_instance = instanceObject.AddComponent<T_MonoBehaviour>();
+                    DontDestroyOnLoad(instanceObject);
+                }
 
                 return s_instance;
             }

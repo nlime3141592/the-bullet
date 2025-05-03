@@ -1,128 +1,55 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Bullet : MonoBehaviour
+namespace Unchord
 {
-    public string direction = "";
-
-    // 총알의 이동속도
-    public float speed;
-
-    public float graze_time = 0.05f;
-    public float passedTime = 0;
-
-    bool processed = false;
-    bool gotCombo = false;
-
-    void Start()
+    public class Bullet : MonoBehaviour
     {
-        Transformation();
-        MaterialSetting();
-    }
+        public float Speed { get; set; }
+        public Vector3 Direction { get; set; }
 
-    void Transformation()
-    {
-        MainScene main = GameObject.FindObjectOfType<MainScene>();
+        #region Inspector Properties
+        public float grazingThreshold = 0.05f;
+        #endregion
 
-        // 총알의 속도를 랜덤으로 지정하는 변수
-        speed = CustomVariable.Speed_Bullet(main.GetGameMode().score);
-        transform.parent = GameObject.Find("Terrain_Bullet").transform;
-    }
+        private float _grazingAreaEnteredTimestamp;
+        private bool _comboApplied;
 
-    void MaterialSetting()
-    {
-        Material bulletheadcolor = new DataGet().Get_OneNowThemeMaterial(CustomVariable.BulletHeadColor);
-        Material bulletbodycolor = new DataGet().Get_OneNowThemeMaterial(CustomVariable.BulletBodyColor);
-
-        // 하위 오브젝트가 속해있는 그룹에 따라 Material 적용
-        foreach (Transform obj in GetComponentsInChildren<Transform>())
+        public void OnPlayerGrazingAreaEnter()
         {
-            if (obj.gameObject.name == "BulletHead")
-            {
-                GameObject head = obj.gameObject;
+            _grazingAreaEnteredTimestamp = GameManager.Instance.ElapsedPlayingTimestamp;
+        }
 
-                foreach (MeshRenderer mat in head.GetComponentsInChildren<MeshRenderer>())
-                {
-                    mat.material = bulletheadcolor;
-                }
-            }
-            else if (obj.gameObject.name == "BulletBody")
-            {
-                GameObject body = obj.gameObject;
+        public void OnPlayerGrazingAreaExit()
+        {
+            if (_comboApplied)
+                return;
 
-                foreach (MeshRenderer mat in body.GetComponentsInChildren<MeshRenderer>())
-                {
-                    mat.material = bulletbodycolor;
-                }
+            GameManager gm = GameManager.Instance;
+
+            if (gm.ElapsedPlayingTimestamp - _grazingAreaEnteredTimestamp >= _grazingAreaEnteredTimestamp)
+            {
+                gm.AddCombo();
+                _comboApplied = true;
             }
         }
-    }
 
-    void Update()
-    {
-        Movement();
-    }
-
-    void Movement()
-    {
-        if (direction == "x")
+        public void OnBulletEndpointReached()
         {
-            float hor = speed * Time.deltaTime;
+            GameManager gm = GameManager.Instance;
 
-            transform.localPosition += new Vector3(hor, 0, 0);
-        }
-        else if (direction == "z")
-        {
-            float hor = speed * Time.deltaTime;
-
-            transform.localPosition += new Vector3(0, 0, hor);
-        }
-    }
-
-    public bool canGetCombo()
-    {
-        if(passedTime >= graze_time && gotCombo == false)
-        {
-            return true;
+            gm.AddScore();
+            gm.BulletPool.Release(this);
         }
 
-        return false;
-    }
-
-    public void getCombo()
-    {
-        gotCombo = true;
-    }
-
-    public void passTime()
-    {
-        passedTime += Time.deltaTime;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        foreach (Transform t in other.gameObject.GetComponents<Transform>())
+        private void OnEnable()
         {
-            string name = t.gameObject.name;
-            if (name == "ScoreAdder" && processed == false)
-            {
-                processed = true;
-
-                if (GameObject.FindObjectOfType<MainScene>().Get_GameStatus() == true)
-                {
-                    GameObject.FindObjectOfType<MainScene>().GetGameMode().AddScore1();
-                }
-            }
+            _grazingAreaEnteredTimestamp = -1.0f;
+            _comboApplied = false;
         }
-    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.name == "BulletBreaker")
+        private void FixedUpdate()
         {
-            Destroy(this.gameObject);
+            transform.position += Speed * Time.fixedDeltaTime * Direction;
         }
     }
 }

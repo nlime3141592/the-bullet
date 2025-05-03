@@ -1,31 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Line : MonoBehaviour
+namespace Unchord
 {
-    void Start()
+    public class Line : MonoBehaviour
     {
-        Transformation();
-        MaterialSettings();
+        #region Inspector Properties
+        public float lineDuration = 0.5f;
+        #endregion
 
-        StartCoroutine(LetsDie());
-    }
+        private float _releaseTimestamp;
 
-    void Transformation()
-    {
-        transform.parent = GameObject.Find("Terrain_Bullet").transform;
-    }
+        private void OnEnable()
+        {
+            _releaseTimestamp = GameManager.Instance.ElapsedPlayingTimestamp + lineDuration;
+        }
 
-    void MaterialSettings()
-    {
-        GetComponentInChildren<MeshRenderer>().material = new DataGet().Get_LineMaterial();
-    }
+        private void Update()
+        {
+            if (_releaseTimestamp < GameManager.Instance.ElapsedPlayingTimestamp)
+                return;
 
-    public IEnumerator LetsDie()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        Destroy(this.gameObject);
+            GameManager.Instance.LinePool.Release(this);
+        }
     }
 }
