@@ -1,5 +1,5 @@
-lastUpgrade=00964
-proj.pluginVersion=0.9.64
+lastUpgrade=20000
+proj.pluginVersion=2.0.0
 proj.AppId=644151129192
 and.BundleId=com.teamjl.bullet
 proj.classDir=Assets

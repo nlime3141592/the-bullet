@@ -10,7 +10,7 @@ public static class GPGSUI
     // 앱 시작하는 순간 바로 실행시킨다.
     public static void EnableGPGS()
     {
-        PlayGamesPlatform.InitializeInstance(new PlayGamesClientConfiguration.Builder().Build());
+        //PlayGamesPlatform.InitializeInstance(new PlayGamesClientConfiguration.Builder().Build());
         PlayGamesPlatform.DebugLogEnabled = true;
         PlayGamesPlatform.Activate();
     }
@@ -61,7 +61,7 @@ public static class GPGSUI
     public static void LogOut()
     {
         // 로그아웃 하는 함수
-        ((PlayGamesPlatform)Social.Active).SignOut();
+        //((PlayGamesPlatform)Social.Active).SignOut();
     }
 
     // 자동로그인시 필요한 콜백 함수
