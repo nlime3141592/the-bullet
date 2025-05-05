@@ -10,12 +10,13 @@ namespace Unchord
 
         #region Inspector Properties
         public float skyboxColorMixingSpeed = 0.2f;
+        public bool useRandomColor = false;
         #endregion
 
         private int _skyboxColorIndex0;
         private int _skyboxColorIndex1;
-        private Color _skyboxColor0;
-        private Color _skyboxColor1;
+        [SerializeField] private Color _skyboxColor0;
+        [SerializeField] private Color _skyboxColor1;
         private float _skyboxColorWeight;
 
         public void LoadTheme(string themeName)
@@ -31,6 +32,15 @@ namespace Unchord
             InitSkyboxColorSet();
 
             // TODO: write changing bgm code here.
+        }
+
+        private void Awake()
+        {
+            if (useRandomColor)
+            {
+                _skyboxColor0 = Random.ColorHSV(0.0f, 1.0f, 0.5f, 1.0f, 0.5f, 1.0f, 1.0f, 1.0f);
+                _skyboxColor1 = Random.ColorHSV(0.0f, 1.0f, 0.5f, 1.0f, 0.5f, 1.0f, 1.0f, 1.0f);
+            }
         }
 
         private void Update()
@@ -65,12 +75,14 @@ namespace Unchord
             Color mixedColor = Color.Lerp(_skyboxColor0, _skyboxColor1, _skyboxColorWeight);
             RenderSettings.skybox.SetColor("_Tint", mixedColor);
 
-            float nextWeight = (_skyboxColorWeight + skyboxColorMixingSpeed * Time.unscaledDeltaTime) % 1.0f;
+            float nextWeight = (_skyboxColorWeight + skyboxColorMixingSpeed * Time.deltaTime) % 1.0f;
 
             if (nextWeight < _skyboxColorWeight)
             {
                 ChangeSkyboxColorSet();
             }
+
+            _skyboxColorWeight = nextWeight;
         }
 
         private void ChangeSkyboxColorSet()
@@ -87,7 +99,11 @@ namespace Unchord
             _skyboxColorIndex1 = index;
 
             _skyboxColor0 = _skyboxColor1;
-            _skyboxColor1 = GetSkyboxColorByIndex(index);
+
+            if (useRandomColor)
+                _skyboxColor1 = Random.ColorHSV(0.0f, 1.0f, 0.5f, 1.0f, 0.5f, 1.0f, 1.0f, 1.0f);
+            else
+                _skyboxColor1 = GetSkyboxColorByIndex(index);
         }
 
         private Color GetSkyboxColorByIndex(int index)

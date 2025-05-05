@@ -101,6 +101,6 @@ public class NormalMode : GameMode
         // 점수 출력이 끝났으면 장면 이동을 위한
         // 버튼 선택지를 제공, 애니메이션 출력
         ui.PlayAnimation_OpenButton();
-        ui.PlayAD();
+        //ui.PlayAD();
     }
 }

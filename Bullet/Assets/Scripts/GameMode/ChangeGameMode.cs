@@ -9,19 +9,19 @@ public class ChangeGameMode
         return new NormalMode();
     }
 
-    public TimeMode Time()
-    {
-        return new TimeMode();
-    }
+    //public TimeMode Time()
+    //{
+    //    return new TimeMode();
+    //}
 
-    public ItemMode Item()
-    {
-        return new ItemMode();
-    }
+    //public ItemMode Item()
+    //{
+    //    return new ItemMode();
+    //}
 
-    public TimeItemMode TimeItem()
-    {
+    //public TimeItemMode TimeItem()
+    //{
 
-        return new TimeItemMode();
-    }
+    //    return new TimeItemMode();
+    //}
 }

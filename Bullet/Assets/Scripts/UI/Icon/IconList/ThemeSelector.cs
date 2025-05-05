@@ -47,7 +47,7 @@ public class ThemeSelector : Icon
 
         BGMset();
 
-        GameObject.FindObjectOfType<MainScene>().colorMix.ResetColor();
+        //GameObject.FindObjectOfType<MainScene>().colorMix.ResetColor();
     }
 
     void BGMset()

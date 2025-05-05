@@ -56,28 +56,28 @@ public class UIopener
         GameObject gameUI = null;
 
         // 게임 시작
-        string path = "Prefabs/UI/Canvas_Game";
-        GameObject load = Resources.Load(path) as GameObject;
+        //string path = "Prefabs/UI/Canvas_Game";
+        //GameObject load = Resources.Load(path) as GameObject;
 
-        GameObject instant = GameObject.Instantiate(load, Vector3.zero, Quaternion.identity);
-        GameObject Canvas = GameObject.Find("Canvas_A");
+        //GameObject instant = GameObject.Instantiate(load, Vector3.zero, Quaternion.identity);
+        //GameObject Canvas = GameObject.Find("Canvas_A");
 
-        instant.transform.SetParent(Canvas.transform, false);
+        //instant.transform.SetParent(Canvas.transform, false);
 
-        gameUI = instant;
+        //gameUI = instant;
 
-        gameUI.GetComponent<GameUI>().GameInitialize();
+        //gameUI.GetComponent<GameUI>().GameInitialize();
 
-        switch (phase)
-        {
-            case "start":
-                gameUI.GetComponent<GameUI>().GameClear();
-                break;
+        //switch (phase)
+        //{
+        //    case "start":
+        //        gameUI.GetComponent<GameUI>().GameClear();
+        //        break;
 
-            case "continue":
-                gameUI.GetComponent<GameUI>().GameContinue();
-                break;
-        }
+        //    case "continue":
+        //        gameUI.GetComponent<GameUI>().GameContinue();
+        //        break;
+        //}
 
         return gameUI;
     }

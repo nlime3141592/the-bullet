@@ -25,7 +25,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     protected Vector2 CanvasSize;
 
     // 플레이어 객체
-    protected Player p;
+    //protected Player p;
 
     private void Start()
     {
@@ -94,7 +94,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         SetPosition(joybt, new Vector2(x, y));
 
         // 플레이어 설정
-        p = GameObject.FindObjectOfType<Player>();
+        //p = GameObject.FindObjectOfType<Player>();
     }
 
     // 플레이어를 움직임
@@ -102,8 +102,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     {
         // 조이스틱 벡터를 normalize하여 플레이어 움직임 함수에 전해주어
         // 플레이어 움직임 함수 내부에서 속도와 곱해서 움직임
-        if(GameObject.FindObjectOfType<MainScene>().Get_GameStatus() == true) // 게임이 진행중인 경우
-            p.PlayerMovement(joystickVector.normalized);
+        //if(GameObject.FindObjectOfType<MainScene>().Get_GameStatus() == true) // 게임이 진행중인 경우
+        //    p.PlayerMovement(joystickVector.normalized);
     }
 
     // 조이스틱을 누를 때

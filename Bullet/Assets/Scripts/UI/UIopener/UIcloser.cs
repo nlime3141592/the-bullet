@@ -30,10 +30,10 @@ public class UIcloser
 
     public static void closeGame()
     {
-        foreach (GameUI ui in GameObject.FindObjectsOfType<GameUI>())
-        {
-            MonoBehaviour.Destroy(ui.gameObject);
-        }
+        //foreach (GameUI ui in GameObject.FindObjectsOfType<GameUI>())
+        //{
+        //    MonoBehaviour.Destroy(ui.gameObject);
+        //}
     }
 
     public static void closeGameEnd()

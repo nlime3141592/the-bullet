@@ -9,13 +9,13 @@ public class GameModeDisplayer : MonoBehaviour
 
     Text message;
 
-    MainScene main;
+    //MainScene main;
 
     private void Start()
     {
         message = GetComponent<Text>();
 
-        main = GameObject.FindObjectOfType<MainScene>();
+        //main = GameObject.FindObjectOfType<MainScene>();
 
         gamemode = 0;
     }
@@ -56,7 +56,7 @@ public class GameModeDisplayer : MonoBehaviour
         {
             case 0:
             case 1:
-                main.SetGameMode(ConvertIntToMode());
+                //main.SetGameMode(ConvertIntToMode());
                 break;
         }
     }

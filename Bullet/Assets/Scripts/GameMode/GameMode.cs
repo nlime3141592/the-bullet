@@ -17,7 +17,7 @@ public class GameMode
     // 실제 게임UI에 보여주고자하는 값
     public string displayvalue;
 
-    protected MainScene main;
+    //protected MainScene main;
 
     public virtual void Display_GameUI()
     {
@@ -48,15 +48,15 @@ public class GameMode
     {
         while(true)
         {
-            yield return new WaitUntil(() => main.Get_GameStatus() == true);
+            //yield return new WaitUntil(() => main.Get_GameStatus() == true);
 
             yield return new WaitForSeconds(0.1f);
 
-            if (main.Get_GameStatus() == true)
-            {
-                playtime++;
-                Display_GameUI();
-            }
+            //if (main.Get_GameStatus() == true)
+            //{
+            //    playtime++;
+            //    Display_GameUI();
+            //}
         }
     }
 

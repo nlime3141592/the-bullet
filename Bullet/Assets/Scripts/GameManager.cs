@@ -21,6 +21,8 @@ namespace Unchord
         public int MaxCombo { get; private set; }
         public int CurrentCombo { get; private set; }
 
+        public bool AdWatched { get; set; }
+
         public ObjectPool<Bullet> BulletPool { get; private set; }
         public ObjectPool<Line> LinePool { get; private set; }
 
@@ -138,6 +140,8 @@ namespace Unchord
 
             _lastComboTimestamp = 0.0f;
             _generationTimestamp = 1.0f;
+
+            AdWatched = false;
         }
 
         private void UpdateGeneration()

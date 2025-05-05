@@ -55,10 +55,10 @@ public class SceneLoader
 
         // Player Generation
         // 이전의 플레이어 초기화
-        foreach (Player obj in GameObject.FindObjectsOfType<Player>())
-        {
-            MonoBehaviour.Destroy(obj.gameObject);
-        }
+        //foreach (Player obj in GameObject.FindObjectsOfType<Player>())
+        //{
+        //    MonoBehaviour.Destroy(obj.gameObject);
+        //}
 
         // 로드한 플레이어 생성
         PlayerObject = GameObject.Instantiate(player, new Vector3(1, 2, 1), Quaternion.identity);
@@ -81,21 +81,21 @@ public class SceneLoader
     // 총알을 로딩하는 함수, 실제적 로딩
     public void Generation_Bullet(Vector3 position, string dir)
     {
-        GameObject bullet = null;
-        Bullet bulletcomp = null;
+        //GameObject bullet = null;
+        //Bullet bulletcomp = null;
 
-        if (dir == "x")
-        {
-            bullet = GameObject.Instantiate(Loading_Bullet(), position + new Vector3(-10, 0.22f, 0), Quaternion.identity);
-            bulletcomp = bullet.GetComponent<Bullet>();
-        }
-        else if (dir == "z")
-        {
-            bullet = GameObject.Instantiate(Loading_Bullet(), position + new Vector3(0, 0.22f, -10), Quaternion.Euler(new Vector3(0, -90, 0)));
-            bulletcomp = bullet.GetComponent<Bullet>();
-        }
+        //if (dir == "x")
+        //{
+        //    bullet = GameObject.Instantiate(Loading_Bullet(), position + new Vector3(-10, 0.22f, 0), Quaternion.identity);
+        //    bulletcomp = bullet.GetComponent<Bullet>();
+        //}
+        //else if (dir == "z")
+        //{
+        //    bullet = GameObject.Instantiate(Loading_Bullet(), position + new Vector3(0, 0.22f, -10), Quaternion.Euler(new Vector3(0, -90, 0)));
+        //    bulletcomp = bullet.GetComponent<Bullet>();
+        //}
 
-        bulletcomp.direction = dir;
+        //bulletcomp.direction = dir;
     }
 
     // 경고선을 로딩하는 함수, 개념적 로딩
@@ -132,38 +132,38 @@ public class SceneLoader
     {
         // 한 프레임당 생성할 최대 총알의 갯수
         // 1 ~ (n-1)
-        MainScene main = GameObject.FindObjectOfType<MainScene>();
-        int generatePerFrame = CustomVariable.Count_Bullet(main.GetGameMode().score);
+        //MainScene main = GameObject.FindObjectOfType<MainScene>();
+        //int generatePerFrame = CustomVariable.Count_Bullet(main.GetGameMode().score);
 
-        int i = 0;
-        for (i = 0; i < generatePerFrame; i++)
-        {
-            float generationDirection = Random.Range(0, 10);
+        //int i = 0;
+        //for (i = 0; i < generatePerFrame; i++)
+        //{
+        //    float generationDirection = Random.Range(0, 10);
 
-            Vector3 LinePosition = Vector3.zero;
-            Vector3 BulletPosition = Vector3.zero;
+        //    Vector3 LinePosition = Vector3.zero;
+        //    Vector3 BulletPosition = Vector3.zero;
 
-            string dir = "";
+        //    string dir = "";
 
-            float _dxz = Random.Range(-0.5f, 2.5f);
+        //    float _dxz = Random.Range(-0.5f, 2.5f);
 
-            if (generationDirection < 5)
-            {
-                LinePosition = new Vector3(-0.5f, 0.48f, _dxz);
-                BulletPosition = LinePosition + new Vector3(-10, 0.22f, 0);
-                dir = "x";
-            }
-            // 우측 상단에 생성
-            else
-            {
-                LinePosition = new Vector3(_dxz, 0.48f, -0.5f);
-                BulletPosition = LinePosition + new Vector3(0, 0.22f, -10);
-                dir = "z";
-            }
+        //    if (generationDirection < 5)
+        //    {
+        //        LinePosition = new Vector3(-0.5f, 0.48f, _dxz);
+        //        BulletPosition = LinePosition + new Vector3(-10, 0.22f, 0);
+        //        dir = "x";
+        //    }
+        //    // 우측 상단에 생성
+        //    else
+        //    {
+        //        LinePosition = new Vector3(_dxz, 0.48f, -0.5f);
+        //        BulletPosition = LinePosition + new Vector3(0, 0.22f, -10);
+        //        dir = "z";
+        //    }
 
-            Generation_Line(LinePosition, dir);
-            Generation_Bullet(BulletPosition, dir);
-        }
+        //    Generation_Line(LinePosition, dir);
+        //    Generation_Bullet(BulletPosition, dir);
+        //}
         
     }
 }

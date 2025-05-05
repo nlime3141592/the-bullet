@@ -10,11 +10,11 @@ public class GameEndUI : UIcomponent
     public Animator ButtonAnimation;
     public Animator ADanimation;
 
-    MainScene main;
+    //MainScene main;
 
     public void ShowRecord()
     {
-        main = GameObject.FindObjectOfType<MainScene>();
+        //main = GameObject.FindObjectOfType<MainScene>();
 
         ButtonAnimation = GetComponent<Animator>();
         foreach(Animator a in GetComponentsInChildren<Animator>())
@@ -34,7 +34,7 @@ public class GameEndUI : UIcomponent
         }
 
         // 점수 기록
-        main.GetGameMode().Recording_GameEndUI();
+        //main.GetGameMode().Recording_GameEndUI();
     }
 
     public void PlayAnimation_NowScore()
@@ -52,19 +52,19 @@ public class GameEndUI : UIcomponent
         ButtonAnimation.Play("OpenButton");
     }
 
-    public void PlayAD()
-    {
-        if (main.GetGameMode().ADwatched == false)
-        {
-            main.GetGameMode().SetADwatched(true);
-            ADanimation.Play("OpenAD");
-        }
-    }
+    //public void PlayAD()
+    //{
+    //    if (main.GetGameMode().ADwatched == false)
+    //    {
+    //        main.GetGameMode().SetADwatched(true);
+    //        ADanimation.Play("OpenAD");
+    //    }
+    //}
 
     // ShowRecord 안에 들어가는 AnimationEvent
     public void AfterAnimation()
     {
-        StartCoroutine(main.GetGameMode().OverCombo1());
+        //StartCoroutine(main.GetGameMode().OverCombo1());
     }
 
     IEnumerator BestScoreDelay()

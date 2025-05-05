@@ -82,11 +82,11 @@ public class Button : Icon
                 break;
 
             case "gamestart_option":
-                GameObject.FindObjectOfType<MainScene>().Set_GameStatus(false);
-                foreach (Player p in GameObject.FindObjectsOfType<Player>())
-                { Destroy(p.gameObject); }
-                new SceneLoader().Generation_Player();
-                GameObject gameUI_1 = new UIopener().Open_gameUI("start");
+                //GameObject.FindObjectOfType<MainScene>().Set_GameStatus(false);
+                //foreach (Player p in GameObject.FindObjectsOfType<Player>())
+                //{ Destroy(p.gameObject); }
+                //new SceneLoader().Generation_Player();
+                //GameObject gameUI_1 = new UIopener().Open_gameUI("start");
                 break;
 
             case "gamestart":
@@ -94,10 +94,10 @@ public class Button : Icon
                 break;
 
             case "showad":
-                GameObject.FindObjectOfType<MainScene>().Set_GameStatus(false);
-                foreach (Player p in GameObject.FindObjectsOfType<Player>())
-                { Destroy(p.gameObject); }
-                GameObject.FindObjectOfType<RewardAds>().ShowAds();
+                //GameObject.FindObjectOfType<MainScene>().Set_GameStatus(false);
+                //foreach (Player p in GameObject.FindObjectsOfType<Player>())
+                //{ Destroy(p.gameObject); }
+                //GameObject.FindObjectOfType<RewardAds>().ShowAds();
                 //ContinueUIShow(); // 테스트용
                 break;
 
@@ -109,7 +109,7 @@ public class Button : Icon
                 break;
 
             case "close_pause":
-                GameObject.FindObjectOfType<MainScene>().GamePausing();
+                //GameObject.FindObjectOfType<MainScene>().GamePausing();
                 break;
 
             case "open_menu":
