@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace Unchord
@@ -8,6 +8,10 @@ namespace Unchord
         //public bool IsCyclicCarousel { get; set; } = false;
 
         public int CurrentBanner => _currentBanner;
+        public bool IsFirstBanner => _currentBanner == 0;
+        public bool IsLastBanner => _currentBanner + 1 == _rectTransform.childCount;
+
+        public event Action<UICarousel> onBannerChanged;
 
         #region Inspector Properties
         public float spacing;
@@ -16,12 +20,12 @@ namespace Unchord
 
         private RectTransform _rectTransform;
         private Rect _rect;
-        private int _currentBanner;
+        private int _currentBanner = 0;
 
         private RectTransform _bannerL;
         private RectTransform _bannerC;
         private RectTransform _bannerR;
-        
+
         public override void Hide()
         {
             if (transform.childCount == 0)
@@ -56,6 +60,9 @@ namespace Unchord
 
         public void SetBannerImmediate(int index)
         {
+            if (_currentBanner == index)
+                return;
+
             _bannerL?.gameObject.SetActive(false);
             _bannerC?.gameObject.SetActive(false);
             _bannerR?.gameObject.SetActive(false);
@@ -80,6 +87,10 @@ namespace Unchord
             }
             else
                 _bannerR = null;
+
+            _currentBanner = index;
+
+            onBannerChanged?.Invoke(this);
         }
 
         public void Next()
@@ -100,6 +111,8 @@ namespace Unchord
             }
             else
                 _bannerR = null;
+
+            onBannerChanged?.Invoke(this);
         }
 
         public void Prev()
@@ -120,6 +133,8 @@ namespace Unchord
             }
             else
                 _bannerL = null;
+
+            onBannerChanged?.Invoke(this);
         }
 
         protected override void Awake()
@@ -146,6 +161,7 @@ namespace Unchord
         {
             base.Update();
 
+            UpdateInput();
             UpdateRectSize();
             UpdateCenterBannerPosition();
             UpdateSideBannerPosition();
@@ -195,6 +211,14 @@ namespace Unchord
             child.anchorMin = Vector2.zero;
             child.anchorMax = Vector2.one;
             child.pivot = 0.5f * Vector2.one;
+        }
+
+        private void UpdateInput()
+        {
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+                this.Prev();
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+                this.Next();
         }
     }
 }

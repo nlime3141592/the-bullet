@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Unchord
 {
-    public abstract class UIView : UIElement, IUIView
+    public class UIView : UIElement, IUIView
     {
         public UIViewType ViewType
         {
@@ -34,30 +34,5 @@ namespace Unchord
         [SerializeField] private UIViewType _viewType = UIViewType.None;
         [SerializeField] private int _viewOrder;
         #endregion
-
-        protected virtual void Awake()
-        {
-
-        }
-
-        protected virtual void Start()
-        {
-
-        }
-
-        protected virtual void OnEnable()
-        {
-
-        }
-
-        protected virtual void Update()
-        {
-
-        }
-
-        protected virtual void OnDisable()
-        {
-
-        }
     }
 }

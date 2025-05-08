@@ -45,7 +45,15 @@ namespace Unchord
         private void Start()
         {
             UIView fadeView = GetView("UIFadeView");
+            UIView mainView = GetView("UIMainView");
+            UICarousel mainCarousel = mainView.GetComponentInChildren<UICarousel>();
+
+            mainCarousel.onBannerChanged += OnMainCarouselBannerChanged;
+
             fadeView.ShowImmediate();
+            mainView.ShowImmediate();
+            mainCarousel.SetBannerImmediate(1);
+            mainCarousel.ShowImmediate();
             fadeView.Hide();
         }
 
@@ -94,6 +102,14 @@ namespace Unchord
             this.SortView();
 
             return instance;
+        }
+
+        private void OnMainCarouselBannerChanged(UICarousel carousel)
+        {
+            if (carousel.CurrentBanner == 1)
+                GetView("UIBlackView").Hide();
+            else
+                GetView("UIBlackView").Show();
         }
     }
 }
