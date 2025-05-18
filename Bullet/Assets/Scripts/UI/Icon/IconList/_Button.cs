@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Button : Icon
+public class _Button : Icon
 {
     public override void OnBeginDrag(PointerEventData pad)
     {

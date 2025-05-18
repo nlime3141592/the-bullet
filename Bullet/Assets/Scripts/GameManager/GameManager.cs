@@ -28,6 +28,9 @@ namespace Unchord
 
         public GameData GameData { get; private set; }
 
+        public Camera MainCamera { get; private set; }
+        public CameraSight CameraSight { get; private set; }
+
         #region Inspector Properties
         public float comboDuration = 3.0f;
         #endregion
@@ -82,6 +85,9 @@ namespace Unchord
             BulletPool = new ObjectPool<Bullet>(OnCreateBullet, OnGetBullet, OnReleaseBullet, null, true, 32, 1024);
             LinePool = new ObjectPool<Line>(OnCreateLine, OnGetLine, OnReleaseLine, null, true, 32, 1024);
 
+            MainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+            CameraSight = MainCamera.GetComponent<CameraSight>();
+
             _bList = new List<Bullet>(32);
             _lList = new List<Line>(32);
 
@@ -133,7 +139,7 @@ namespace Unchord
             ElapsedPlayingTimestamp = 0.0f;
             AbsolutePlayingTimestamp = 0.0f;
 
-            CurrentGameMode = _GameMode.None;
+            CurrentGameMode = _GameMode.Score;
 
             CurrentScore = 0;
             CurrentCombo = 0;

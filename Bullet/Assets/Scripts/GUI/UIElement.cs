@@ -8,22 +8,22 @@ namespace Unchord
 
         public virtual void Show()
         {
-
+            this.gameObject.SetActive(true);
         }
 
         public virtual void ShowImmediate()
         {
-
+            this.gameObject.SetActive(true);
         }
 
         public virtual void Hide()
         {
-
+            this.gameObject.SetActive(false);
         }
 
         public virtual void HideImmediate()
         {
-
+            this.gameObject.SetActive(false);
         }
 
         protected virtual void Awake()
